@@ -1,3 +1,14 @@
+@font-face {
+  font-family: 'Lobster';
+  src: url('./fonts/Lobster-Regular.eot');
+  src: url('./fonts/Lobster-Regular.eot?#iefix') format('embedded-opentype'),
+      url('./fonts/Lobster-Regular.woff2') format('woff2'),
+      url('./fonts/Lobster-Regular.woff') format('woff'),
+      url('./fonts/Lobster-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -6,6 +17,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-family: 'Lobster', cursive;
 }
 
 code {
