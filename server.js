@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const jsonParser = express.json();
-// const cors = require('cors');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
 var port = process.env.PORT || 3001;
@@ -15,6 +15,9 @@ const reicpeScheme = new Schema({
   { versionKey: false }
 );
 const Recipe = mongoose.model("Recipe", reicpeScheme);
+
+app.use(cors());
+app.options('*', cors());
 
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
@@ -30,9 +33,6 @@ mongoose.connect("mongodb://localhost:27017/recipedb", { useNewUrlParser: true }
       console.log("Сервер ожидает подключения...");
     });
   });
-
-// app.use(cors());
-// app.options('*', cors());
 
 const cutPotentialDangerousChars = (data) => {
   let potentialDangerousChars = /[<>{}]/gi;
