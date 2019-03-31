@@ -10,7 +10,8 @@ const initialState = {
         currentRecipeObj: {},
         isRecipeChoosen: false,
         isEditRecipeOpen: false,
-        isRecipeUpdateSuccess: false
+        isRecipeUpdateSuccess: false,
+        isRecipeDeleteSuccess: false
     }
 };
 

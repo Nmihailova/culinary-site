@@ -5,7 +5,8 @@ const initialState = {
     currentRecipeId: '',
     isRecipeChoosen: false,
     isEditRecipeOpen: false,
-    isRecipeUpdateSuccess: false
+    isRecipeUpdateSuccess: false,
+    isRecipeDeleteSuccess: false
   };
   
   function recipesReducer (state = initialState, action) {
@@ -30,6 +31,12 @@ const initialState = {
   
       case 'UPDATE_RECIPE_FAIL':
         return { ...state, isRecipeUpdateSuccess: false };
+
+      case 'DELETE_RECIPE_SUCCESS':
+        return { ...state, isRecipeDeleteSuccess: true };
+  
+      case 'DELETE_RECIPE_FAIL':
+        return { ...state, isRecipeDeleteSuccess: false };
 
       case 'OPEN_ADD_RECIPE':
         return { ...state, isAddRecipeOpen: !state.isAddRecipeOpen};

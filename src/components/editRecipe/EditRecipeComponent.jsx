@@ -46,8 +46,8 @@ class EditRecipeFormComponent extends Component {
             title: this.state.editedRecipeTitle,
             text: this.state.editedRecipeText
         };
-        console.log(dataObj);
         this.props.requestUpdateRecipesApi(dataObj);
+        window.location.reload();
     };
     render() {
         return (

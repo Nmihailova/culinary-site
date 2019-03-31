@@ -96,3 +96,26 @@ export const requestAddRecipeApi = data => {
         })
     }
   };
+
+  export const requestDeleteRecipeApi = id => {
+    return dispatch => {
+      dispatch({
+        type: 'DELETE_RECIPE_REQUEST',
+        payload: id
+      })
+  
+      axios.delete(`${HOST}/delete-recipes/${id}`)
+        .then(res => {
+          dispatch({
+            type: 'DELETE_RECIPE_SUCCESS',
+            payload: res.data
+          })
+        })
+        .catch(err => {
+          dispatch({
+            type: 'DELETE_RECIPE_FAIL',
+            payload: err
+          })
+        })
+    }
+  };

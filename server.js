@@ -21,7 +21,7 @@ app.options('*', cors());
 
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
-app.get('/', function (req, res) {
+app.get(/\/[^get-]/, function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
@@ -80,8 +80,9 @@ app.put('/update-recipe', jsonParser, (req, res) => {
   })
 })
 
-app.delete("/delete-recipes", function (req, res) {
-  Recipe.deleteMany({ title: { $exists: true } }, function (err, data) {
+app.delete("/delete-recipes/:id", function (req, res) {
+  let id = req.params.id;
+  Recipe.findByIdAndDelete(id, function (err, data) {
     if (err) return console.log(err);
     res.send(data);
   });
