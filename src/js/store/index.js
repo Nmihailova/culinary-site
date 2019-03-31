@@ -4,8 +4,13 @@ import thunk from 'redux-thunk';
 
 const initialState = {
     recipesReducer: {
+        isAddRecipeOpen: false,
         isRecipedAdded: false,
-        recipeList: []
+        recipeList: [],
+        currentRecipeObj: {},
+        isRecipeChoosen: false,
+        isEditRecipeOpen: false,
+        isRecipeUpdateSuccess: false
     }
 };
 

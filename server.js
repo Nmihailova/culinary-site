@@ -4,7 +4,7 @@ const jsonParser = express.json();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
-var port = process.env.PORT || 3001;
+const port = process.env.PORT || 3001;
 
 const Schema = mongoose.Schema;
 
@@ -21,7 +21,7 @@ app.options('*', cors());
 
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
-app.get('/*', function (req, res) {
+app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
@@ -42,24 +42,25 @@ const cutPotentialDangerousChars = (data) => {
   }
 };
 
-app.post('/api/add-new-recipe', jsonParser, function (req, res) {
+app.post('/add-new-recipe', jsonParser, function (req, res) {
   if (!req.body) return res.sendStatus(400);
 
   let dataObj = req.body;
   cutPotentialDangerousChars(dataObj);
 
   Recipe.create({
+    img: dataObj.img,
     title: dataObj.title,
     text: dataObj.text
   }).then(newRecipe => {
       res.send(newRecipe);
   }).catch(err => {
-    console.log(err, 'feedback not created');
+    console.log(err, "recipe not created");
     res.send(err);
   });
 });
 
-app.get('/api/get-recipes', (req, res) => {
+app.get('/get-recipes', (req, res) => {
   Recipe.find({}, (err, recipes) => {
     if (err) return console.log(err);
 
@@ -67,7 +68,19 @@ app.get('/api/get-recipes', (req, res) => {
   });
 });
 
-app.delete("/api/delete-recipes", function (req, res) {
+app.put('/update-recipe', jsonParser, (req, res) => {
+  let dataObj = req.body;
+  cutPotentialDangerousChars(dataObj);
+
+  let id = dataObj.id;
+  Recipe.findOneAndUpdate({_id: id}, {title: dataObj.title, text: dataObj.text}, {new: true}, function(err, recipe) {
+    if(err) return console.log(err);
+
+    res.send(recipe);
+  })
+})
+
+app.delete("/delete-recipes", function (req, res) {
   Recipe.deleteMany({ title: { $exists: true } }, function (err, data) {
     if (err) return console.log(err);
     res.send(data);

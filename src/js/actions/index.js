@@ -2,23 +2,50 @@ import axios from 'axios';
 
 const HOST = "http://localhost:3001";
 
-export const requestLeaveFeedbackApi = data => {
+export const openAddRecipe = () => {
+  return {
+    type: 'OPEN_ADD_RECIPE'
+  }
+};
+
+export const openEditRecipe = () => {
+  return {
+    type: 'OPEN_EDIT_RECIPE'
+  }
+};
+
+export const setCurRecipeObj = (data) => {
+  return  {
+    type: 'SET_CURRENT_RECIPE_ID',
+    data
+  }
+};
+
+export const showRecipe = () => {
+  return  {
+    type: 'SHOW_RECIPE'
+  }
+};
+
+//api middlewares
+
+export const requestAddRecipeApi = data => {
     return dispatch => {
       dispatch({
-        type: 'LEAVE_FEEDBACK_REQUEST',
+        type: 'ADD_RECIPE_REQUEST',
         payload: data
       })
   
-      axios.post(`${HOST}/leave-feedback`, data)
+      axios.post(`${HOST}/add-new-recipe`, data)
         .then(res => {
           dispatch({
-            type: 'LEAVE_FEEDBACK_SUCCESS',
+            type: 'ADD_RECIPE_SUCCESS',
             payload: res.data
           })
         })
         .catch(err => {
           dispatch({
-            type: 'LEAVE_FEEDBACK_FAIL',
+            type: 'ADD_RECIPE_FAIL',
             payload: err
           })
         })
@@ -31,7 +58,7 @@ export const requestLeaveFeedbackApi = data => {
         type: 'GET_RECIPE_LIST_REQUEST'
       })
   
-      axios.get(`${HOST}/api/get-recipes`)
+      axios.get(`${HOST}/get-recipes`)
         .then(res => {
           dispatch({
             type: 'GET_RECIPE_LIST_SUCCESS',
@@ -41,6 +68,29 @@ export const requestLeaveFeedbackApi = data => {
         .catch(err => {
           dispatch({
             type: 'GET_RECIPE_LIST_FAIL',
+            payload: err
+          })
+        })
+    }
+  };
+
+  export const requestUpdateRecipesApi = data => {
+    return dispatch => {
+      dispatch({
+        type: 'UPDATE_RECIPE_REQUEST',
+        payload: data
+      })
+  
+      axios.put(`${HOST}/update-recipe`, data)
+        .then(res => {
+          dispatch({
+            type: 'UPDATE_RECIPE_SUCCESS',
+            payload: res.data
+          })
+        })
+        .catch(err => {
+          dispatch({
+            type: 'UPDATE_RECIPE_FAIL',
             payload: err
           })
         })
