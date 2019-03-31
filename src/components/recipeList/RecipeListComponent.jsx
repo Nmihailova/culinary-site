@@ -6,7 +6,8 @@ import './list.scss';
 
 const mapStateToProps = state => {
     return {
-        recipeList: state.recipesReducer.recipeList
+        recipeList: state.recipesReducer.recipeList,
+        currentRecipeObj: state.recipesReducer.currentRecipeObj
     }
 };
 const mapDispatchToProps = dispatch => {
@@ -35,7 +36,11 @@ class RecipeListComponent extends Component {
         let recipeList;
         if(this.props.recipeList.length > 0 && typeof this.props.recipeList !== 'string') {
             recipeList = this.props.recipeList.map((recipe) => {
-                return <li className="recipes__list__item" key={recipe._id} id={recipe._id} onClick={this.chooseRecipe}>{recipe.title}</li>
+                return <li className={this.props.currentRecipeObj._id === recipe._id ? "recipes__list__item active" : "recipes__list__item"} 
+                    key={recipe._id} id={recipe._id} 
+                    onClick={this.chooseRecipe}>
+                    {recipe.title}
+                </li>
             });
         } else {
             recipeList = "Рецептов пока нет, но вы можете их добавить."

@@ -7,9 +7,16 @@
     margin: auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     background-color: white;
+
+    &__buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 66%;
+    }
 
     &__title,
     &__text {

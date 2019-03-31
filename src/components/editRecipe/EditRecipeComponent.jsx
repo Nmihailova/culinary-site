@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { requestUpdateRecipesApi } from '../../js/actions';
+import { requestUpdateRecipesApi, openEditRecipe } from '../../js/actions';
+import Button from '@material-ui/core/Button';
 
 import './edit.scss';
 
@@ -11,7 +12,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        requestUpdateRecipesApi:(data) => dispatch(requestUpdateRecipesApi(data))
+        requestUpdateRecipesApi:(data) => dispatch(requestUpdateRecipesApi(data)),
+        openEditRecipe: () => dispatch(openEditRecipe())
     }
 };
 
@@ -54,13 +56,17 @@ class EditRecipeFormComponent extends Component {
             <div className="edit-recipe">
                 <label>
                     Название рецепта<br/>
-                    <input type="text" size="40" value={this.state.editedRecipeTitle} name="title" className="add-recipe__title" onChange={this.enterTitle}/>
+                    <input type="text" size="60" value={this.state.editedRecipeTitle} name="title" className="add-recipe__title" onChange={this.enterTitle}/>
                 </label>
                 <label>
                     Текст рецепта<br/>
-                    <textarea name="text" cols="40" rows="10" value={this.state.editedRecipeText} className="add-recipe__text" onChange={this.enterText}/>
+                    <textarea name="text" cols="60" rows="10" value={this.state.editedRecipeText} className="add-recipe__text" onChange={this.enterText}/>
                 </label>
-                <button className="edit-recipe__add-btn" onClick={this.editRecipe}>Сохранить изменения</button>
+                <div className="edit-recipe__buttons">
+                    <Button variant="contained" onClick={this.editRecipe}>Сохранить изменения</Button>
+                    <Button variant="contained" onClick={this.props.openEditRecipe}>Отмена</Button>
+                </div>
+                
             </div>
         )
     }

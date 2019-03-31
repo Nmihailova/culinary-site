@@ -18,7 +18,11 @@ const mapStateToProps = state => {
 const CommonDisplayComponent = ({ isAddRecipeOpen, isRecipeChoosen, isEditRecipeOpen }) => {
     return (
         <section className="common-display">
-            {isRecipeChoosen && <ShowRecipe />}
+            {isRecipeChoosen ? <ShowRecipe />
+            : <div className="common-display__note">
+                <p className="common-display__note__text">Выберите рецепт <br/>или добавьте новый</p>
+            </div>
+            }
             {isAddRecipeOpen && <AddRecipeFormComponent />}
             {isEditRecipeOpen && <EditRecipeForm />}
         </section>
