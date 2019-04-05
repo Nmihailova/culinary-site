@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { requestUpdateRecipesApi, openEditRecipe } from '../../js/actions';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 import './edit.scss';
 
@@ -49,7 +50,7 @@ class EditRecipeFormComponent extends Component {
             text: this.state.editedRecipeText
         };
         this.props.requestUpdateRecipesApi(dataObj);
-        window.location.reload();
+        this.props.openEditRecipe();
     };
     render() {
         return (
@@ -63,8 +64,8 @@ class EditRecipeFormComponent extends Component {
                     <textarea name="text" cols="60" rows="10" value={this.state.editedRecipeText} className="add-recipe__text" onChange={this.enterText}/>
                 </label>
                 <div className="edit-recipe__buttons">
-                    <Button variant="contained" onClick={this.editRecipe}>Сохранить изменения</Button>
-                    <Button variant="contained" onClick={this.props.openEditRecipe}>Отмена</Button>
+                <Link to="/show-recipe"><Button variant="contained" onClick={this.editRecipe}>Сохранить изменения</Button></Link>
+                    <Link to="/show-recipe"><Button variant="contained" onClick={this.props.openEditRecipe}>Отмена</Button></Link>
                 </div>
                 
             </div>

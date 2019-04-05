@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
 
 import './common.scss';
 
 import AddRecipeFormComponent from '../addRecipe/AddRecipeComponent';
 import EditRecipeForm from '../editRecipe/EditRecipeComponent';
 import ShowRecipe from '../showRecipes/ShowRecipeComponent';
+import {CommonText} from './CommonTextComponent';
 
 const mapStateToProps = state => {
     return {
@@ -18,13 +20,12 @@ const mapStateToProps = state => {
 const CommonDisplayComponent = ({ isAddRecipeOpen, isRecipeChoosen, isEditRecipeOpen }) => {
     return (
         <section className="common-display">
-            {isRecipeChoosen ? <ShowRecipe />
-            : <div className="common-display__note">
-                <p className="common-display__note__text">Выберите рецепт <br/>или добавьте новый</p>
-            </div>
-            }
-            {isAddRecipeOpen && <AddRecipeFormComponent />}
-            {isEditRecipeOpen && <EditRecipeForm />}
+            <Switch>
+                <Route exact path="/" component={CommonText} />
+                <Route exact path="/show-recipe" component={ShowRecipe} />
+                <Route exact path="/add-recipe" component={AddRecipeFormComponent} />
+                <Route exact path="/edit-recipe" component={EditRecipeForm} />
+            </Switch>
         </section>
     )
 };

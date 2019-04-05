@@ -13,7 +13,7 @@ const ShowRecipeComponent = ({currentRecipeObj}) =>{
     return (
         <div className="show">
             <h2 className="show__title">{currentRecipeObj.title}</h2>
-            <p className="shiw__text">{currentRecipeObj.text}</p>
+            <p className="show__text">{currentRecipeObj.text}</p>
         </div>
     )
 };

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
@@ -33,12 +34,16 @@ class EditPanelComponent extends Component {
     render() {
         return (
             <div className="edit">
-                <Fab size="medium" color="default" aria-label="Add" onClick={this.props.openAddRecipe}>
-                    <AddIcon />
-                </Fab>
-                <Fab size="medium" color="default" disabled={this.props.isRecipeChoosen ? false : true} aria-label="Edit" onClick={this.props.openEditRecipe}>
-                    <EditIcon />
-                </Fab>
+                <Link to="/add-recipe">                
+                    <Fab size="medium" color="default" aria-label="Add" onClick={this.props.openAddRecipe}>
+                        <AddIcon />
+                    </Fab>
+                </Link>
+                <Link to="/edit-recipe">
+                    <Fab size="medium" color="default" disabled={this.props.isRecipeChoosen ? false : true} aria-label="Edit" onClick={this.props.openEditRecipe}>
+                        <EditIcon />
+                    </Fab>
+                </Link>
                 <Fab size="medium" color="default" disabled={this.props.isRecipeChoosen ? false : true} aria-label="Delete" onClick={this.deleteRecipe}>
                     <DeleteIcon />
                 </Fab>

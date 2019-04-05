@@ -6,4 +6,13 @@
     height: 100%;
     margin: auto;
     background-color: white;
+    overflow: auto;
+    white-space: pre-line;
+
+    &__text {
+        width: 85%;
+        position: relative;
+        margin: 30px auto 40px;
+        text-align: left;
+    }
 }

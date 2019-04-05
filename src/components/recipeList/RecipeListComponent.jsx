@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { requestGetRecipesApi, setCurRecipeObj, showRecipe } from '../../js/actions';
+import { Link } from 'react-router-dom';
 
 import './list.scss';
 
@@ -36,11 +37,13 @@ class RecipeListComponent extends Component {
         let recipeList;
         if(this.props.recipeList.length > 0 && typeof this.props.recipeList !== 'string') {
             recipeList = this.props.recipeList.map((recipe) => {
-                return <li className={this.props.currentRecipeObj._id === recipe._id ? "recipes__list__item active" : "recipes__list__item"} 
-                    key={recipe._id} id={recipe._id} 
-                    onClick={this.chooseRecipe}>
-                    {recipe.title}
-                </li>
+                return <Link to="/show-recipe">
+                    <li className={this.props.currentRecipeObj._id === recipe._id ? "recipes__list__item active" : "recipes__list__item"} 
+                        key={recipe._id} id={recipe._id} 
+                        onClick={this.chooseRecipe}>
+                        {recipe.title}
+                    </li>
+                </Link>
             });
         } else {
             recipeList = "Рецептов пока нет, но вы можете их добавить."
