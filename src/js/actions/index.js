@@ -16,7 +16,7 @@ export const openEditRecipe = () => {
 
 export const setCurRecipeObj = (data) => {
   return  {
-    type: 'SET_CURRENT_RECIPE_ID',
+    type: 'SET_CURRENT_RECIPE_OBJECT',
     data
   }
 };
@@ -38,6 +38,7 @@ export const requestAddRecipeApi = data => {
   
       axios.post(`${HOST}/add-new-recipe`, data)
         .then(res => {
+          dispatch(requestGetRecipesApi());
           dispatch({
             type: 'ADD_RECIPE_SUCCESS',
             payload: res.data
@@ -83,6 +84,7 @@ export const requestAddRecipeApi = data => {
   
       axios.put(`${HOST}/update-recipe`, data)
         .then(res => {
+          dispatch(requestGetRecipesApi());
           dispatch({
             type: 'UPDATE_RECIPE_SUCCESS',
             payload: res.data
@@ -106,6 +108,7 @@ export const requestAddRecipeApi = data => {
   
       axios.delete(`${HOST}/delete-recipes/${id}`)
         .then(res => {
+          dispatch(requestGetRecipesApi());
           dispatch({
             type: 'DELETE_RECIPE_SUCCESS',
             payload: res.data

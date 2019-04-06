@@ -7,8 +7,8 @@ import './list.scss';
 
 const mapStateToProps = state => {
     return {
-        recipeList: state.recipesReducer.recipeList,
-        currentRecipeObj: state.recipesReducer.currentRecipeObj
+        recipeList: state.getReducer.recipeList,
+        currentRecipeObj: state.chooseReducer.currentRecipeObj
     }
 };
 const mapDispatchToProps = dispatch => {
@@ -20,10 +20,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 class RecipeListComponent extends Component {
-    componentDidMount() {
-        this.props.requestGetRecipesApi();
-    }
-
     chooseRecipe = e => {
         let currentId = e.target.id;
         let currRecipe = this.props.recipeList.filter(recipe => {
@@ -37,9 +33,9 @@ class RecipeListComponent extends Component {
         let recipeList;
         if(this.props.recipeList.length > 0 && typeof this.props.recipeList !== 'string') {
             recipeList = this.props.recipeList.map((recipe) => {
-                return <Link to="/show-recipe">
+                return <Link class="link" key={recipe._id} to={`/show-recipe/${recipe._id}`}>
                     <li className={this.props.currentRecipeObj._id === recipe._id ? "recipes__list__item active" : "recipes__list__item"} 
-                        key={recipe._id} id={recipe._id} 
+                         id={recipe._id} 
                         onClick={this.chooseRecipe}>
                         {recipe.title}
                     </li>

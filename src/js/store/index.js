@@ -3,14 +3,22 @@ import combineReducers from '../reducers/index';
 import thunk from 'redux-thunk';
 
 const initialState = {
-    recipesReducer: {
+    addReducer: {
         isAddRecipeOpen: false,
-        isRecipedAdded: false,
-        recipeList: [],
+        isRecipedAdded: false
+    },
+    getReducer: {
+        recipeList: []
+    },
+    chooseReducer: {
         currentRecipeObj: {},
-        isRecipeChoosen: false,
+        isRecipeChoosen: false
+    },
+    editReducer: {
         isEditRecipeOpen: false,
-        isRecipeUpdateSuccess: false,
+        isRecipeUpdateSuccess: false
+    },
+    deleteReducer: {
         isRecipeDeleteSuccess: false
     }
 };

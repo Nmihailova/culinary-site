@@ -13,8 +13,8 @@ import './edit.scss';
 
 const mapStateToProps = state => {
     return {
-        isRecipeChoosen: state.recipesReducer.isRecipeChoosen,
-        currentRecipeObj: state.recipesReducer.currentRecipeObj
+        isRecipeChoosen: state.chooseReducer.isRecipeChoosen,
+        currentRecipeObj: state.chooseReducer.currentRecipeObj
     }
 };
 
@@ -29,7 +29,6 @@ const mapDispatchToProps = dispatch => {
 class EditPanelComponent extends Component {
     deleteRecipe = () => {
         this.props.requestDeleteRecipeApi(this.props.currentRecipeObj._id);
-        window.location.reload();
     }
     render() {
         return (
@@ -40,13 +39,16 @@ class EditPanelComponent extends Component {
                     </Fab>
                 </Link>
                 <Link to="/edit-recipe">
-                    <Fab size="medium" color="default" disabled={this.props.isRecipeChoosen ? false : true} aria-label="Edit" onClick={this.props.openEditRecipe}>
+                    <Fab size="medium" color="default" disabled={Object.keys(this.props.currentRecipeObj).length !== 0 ? false : true} aria-label="Edit" onClick={this.props.openEditRecipe}>
                         <EditIcon />
                     </Fab>
                 </Link>
-                <Fab size="medium" color="default" disabled={this.props.isRecipeChoosen ? false : true} aria-label="Delete" onClick={this.deleteRecipe}>
-                    <DeleteIcon />
-                </Fab>
+                <Link to="/">
+                    <Fab size="medium" color="default" disabled={Object.keys(this.props.currentRecipeObj).length !== 0 ? false : true} aria-label="Delete" onClick={this.deleteRecipe}>
+                        <DeleteIcon />
+                    </Fab>
+                </Link>
+                
             </div>
         )
     }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { requestUpdateRecipesApi, openEditRecipe } from '../../js/actions';
+import { requestUpdateRecipesApi, openEditRecipe, setCurRecipeObj, requestGetRecipesApi } from '../../js/actions';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 
@@ -8,13 +8,16 @@ import './edit.scss';
 
 const mapStateToProps = state => {
     return {
-        currentRecipeObj: state.recipesReducer.currentRecipeObj
+        currentRecipeObj: state.chooseReducer.currentRecipeObj,
+        recipeList: state.getReducer.recipeList
     }
 };
 const mapDispatchToProps = dispatch => {
     return {
         requestUpdateRecipesApi:(data) => dispatch(requestUpdateRecipesApi(data)),
-        openEditRecipe: () => dispatch(openEditRecipe())
+        requestGetRecipesApi: () => dispatch(requestGetRecipesApi()),
+        openEditRecipe: () => dispatch(openEditRecipe()),
+        setCurRecipeObj: data=> dispatch(setCurRecipeObj(data))
     }
 };
 
@@ -51,6 +54,7 @@ class EditRecipeFormComponent extends Component {
         };
         this.props.requestUpdateRecipesApi(dataObj);
         this.props.openEditRecipe();
+        
     };
     render() {
         return (
@@ -64,8 +68,12 @@ class EditRecipeFormComponent extends Component {
                     <textarea name="text" cols="60" rows="10" value={this.state.editedRecipeText} className="add-recipe__text" onChange={this.enterText}/>
                 </label>
                 <div className="edit-recipe__buttons">
-                <Link to="/show-recipe"><Button variant="contained" onClick={this.editRecipe}>Сохранить изменения</Button></Link>
-                    <Link to="/show-recipe"><Button variant="contained" onClick={this.props.openEditRecipe}>Отмена</Button></Link>
+                    <Link className="link" to={`/show-recipe/${this.props.currentRecipeObj._id}`}>
+                        <Button variant="contained" onClick={this.editRecipe}>Сохранить изменения</Button>
+                    </Link>
+                    <Link className="link" to={`/show-recipe/${this.props.currentRecipeObj._id}`}>
+                        <Button variant="contained" onClick={this.props.openEditRecipe}>Отмена</Button>
+                    </Link>
                 </div>
                 
             </div>

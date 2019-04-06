@@ -11,18 +11,19 @@ import {CommonText} from './CommonTextComponent';
 
 const mapStateToProps = state => {
     return {
-        isAddRecipeOpen: state.recipesReducer.isAddRecipeOpen,
-        isRecipeChoosen: state.recipesReducer.isRecipeChoosen,
-        isEditRecipeOpen: state.recipesReducer.isEditRecipeOpen
+        isAddRecipeOpen: state.addReducer.isAddRecipeOpen,
+        isRecipeChoosen: state.chooseReducer.isRecipeChoosen,
+        isEditRecipeOpen: state.editReducer.isEditRecipeOpen,
+        recipeList: state.getReducer.recipeList
     }
 };
 
-const CommonDisplayComponent = ({ isAddRecipeOpen, isRecipeChoosen, isEditRecipeOpen }) => {
+const CommonDisplayComponent = ({ isAddRecipeOpen, isRecipeChoosen, isEditRecipeOpen, recipeList }) => {
     return (
         <section className="common-display">
             <Switch>
                 <Route exact path="/" component={CommonText} />
-                <Route exact path="/show-recipe" component={ShowRecipe} />
+                {typeof recipeList !== 'string' && <Route exact path="/show-recipe/:recipeId" component={ShowRecipe} />}
                 <Route exact path="/add-recipe" component={AddRecipeFormComponent} />
                 <Route exact path="/edit-recipe" component={EditRecipeForm} />
             </Switch>

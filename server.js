@@ -49,7 +49,6 @@ app.post('/add-new-recipe', jsonParser, function (req, res) {
   cutPotentialDangerousChars(dataObj);
 
   Recipe.create({
-    img: dataObj.img,
     title: dataObj.title,
     text: dataObj.text
   }).then(newRecipe => {

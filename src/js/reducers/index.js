@@ -1,6 +1,14 @@
 import { combineReducers } from 'redux';
-import recipesReducer from './recipes';
+import deleteReducer from './delete';
+import addReducer from './add';
+import chooseReducer from './choose';
+import editReducer from './edit';
+import getReducer from './get';
 
 export default combineReducers({
-    recipesReducer
+    deleteReducer,
+    addReducer,
+    chooseReducer,
+    editReducer,
+    getReducer
 });
