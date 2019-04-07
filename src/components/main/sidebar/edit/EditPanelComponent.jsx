@@ -7,13 +7,12 @@ import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import { openAddRecipe, openEditRecipe, requestDeleteRecipeApi, setCurRecipeObj } from '../../js/actions';
+import { openAddRecipe, openEditRecipe, requestDeleteRecipeApi, setCurRecipeObj } from '../../../../js/actions';
 
 import './edit.scss';
 
 const mapStateToProps = state => {
     return {
-        isRecipeChoosen: state.chooseReducer.isRecipeChoosen,
         currentRecipeObj: state.chooseReducer.currentRecipeObj
     }
 };
@@ -33,24 +32,26 @@ class EditPanelComponent extends Component {
         this.props.setCurRecipeObj({});
     }
     render() {
+        let { openAddRecipe, currentRecipeObj, openEditRecipe } = this.props;
         return (
             <div className="edit">
                 <Link to="/add-recipe">                
-                    <Fab size="medium" color="default" aria-label="Add" onClick={this.props.openAddRecipe}>
+                    <Fab size="medium" color="default" aria-label="Add" onClick={openAddRecipe}>
                         <AddIcon />
                     </Fab>
                 </Link>
+
                 <Link to="/edit-recipe">
-                    <Fab size="medium" color="default" disabled={Object.keys(this.props.currentRecipeObj).length !== 0 ? false : true} aria-label="Edit" onClick={this.props.openEditRecipe}>
+                    <Fab size="medium" color="default" disabled={Object.keys(currentRecipeObj).length !== 0 ? false : true} aria-label="Edit" onClick={openEditRecipe}>
                         <EditIcon />
                     </Fab>
                 </Link>
+
                 <Link to="/">
-                    <Fab size="medium" color="default" disabled={Object.keys(this.props.currentRecipeObj).length !== 0 ? false : true} aria-label="Delete" onClick={this.deleteRecipe}>
+                    <Fab size="medium" color="default" disabled={Object.keys(currentRecipeObj).length !== 0 ? false : true} aria-label="Delete" onClick={this.deleteRecipe}>
                         <DeleteIcon />
                     </Fab>
                 </Link>
-                
             </div>
         )
     }

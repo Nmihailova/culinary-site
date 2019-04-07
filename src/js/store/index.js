@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 const initialState = {
     addReducer: {
         isAddRecipeOpen: false,
-        isRecipedAdded: false
+        isRecipeAdded: false
     },
     getReducer: {
         recipeList: []

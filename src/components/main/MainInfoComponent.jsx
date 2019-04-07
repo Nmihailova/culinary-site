@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { requestGetRecipesApi } from '../../js/actions';
 
-import { SideBar } from '../sidebar/SideBarComponent';
-import CommonDisplay from '../commonDisplay/CommonDisplayComponent';
+import { SideBar } from './sidebar/SideBarComponent';
+import CommonDisplay from './commonDisplay/CommonDisplayComponent';
 
 import './main.scss';
 

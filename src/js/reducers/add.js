@@ -1,18 +1,17 @@
 const initialState = {
     isAddRecipeOpen: false,
-    isRecipedAdded: false
+    isRecipeAdded: false
 };
 
 function addReducer (state = initialState, action) {
     switch (action.type) {
         case 'ADD_RECIPE_SUCCESS':
-            return { ...state, isRecipedAdded: true };
+            return { ...state, isRecipeAdded: true };
   
         case 'ADD_RECIPE_FAIL':
-            return { ...state, isRecipedAdded: false };
+            return { ...state, isRecipeAdded: false };
 
         case 'OPEN_ADD_RECIPE':
-            console.log(!state.isAddRecipeOpen);
             return { ...state, isAddRecipeOpen: !state.isAddRecipeOpen};
     
         default:

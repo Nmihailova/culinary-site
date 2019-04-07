@@ -1,8 +1,8 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
 
-import RecipeList from '../recipeList/RecipeListComponent';
-import EditPanel from '../edit/EditPanelComponent';
+import RecipeList from './recipeList/RecipeListComponent';
+import EditPanel from './edit/EditPanelComponent';
 
 import './sidebar.scss';
 

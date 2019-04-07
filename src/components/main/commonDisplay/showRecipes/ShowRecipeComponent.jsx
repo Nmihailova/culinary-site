@@ -1,9 +1,6 @@
 import React, { Component} from 'react';
 import { connect } from 'react-redux';
-import {setCurRecipeObj} from '../../js/actions';
-import CircularProgress from '@material-ui/core/CircularProgress';
-
-import GetCurrentRecipe from './GetCurrentRecipeComponent';
+import { setCurRecipeObj } from '../../../../js/actions';
 
 import './show.scss';
 
@@ -33,13 +30,10 @@ class ShowRecipeComponent extends Component {
     render() {
         return (
             <div className="show">
-                {this.props.currentRecipeObj ? 
-                    <div>
-                        <h2 className="show__title">{this.props.currentRecipeObj.title}</h2>
-                        <p className="show__text">{this.props.currentRecipeObj.text}</p>
-                    </div> 
-                    : <CircularProgress className="show__circular" />
-                }
+                <div>
+                    <h2 className="show__title">{this.props.currentRecipeObj.title}</h2>
+                    <p className="show__text">{this.props.currentRecipeObj.text}</p>
+                </div>     
             </div>
         )
     }

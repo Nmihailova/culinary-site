@@ -9,7 +9,6 @@ function chooseReducer (state = initialState, action) {
             return { ...state, isRecipeChoosen: true };
             
         case 'SET_CURRENT_RECIPE_OBJECT':
-        console.log(action.data);
             return { ...state, currentRecipeObj: action.data};  
       
         default:
