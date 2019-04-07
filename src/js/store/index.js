@@ -22,7 +22,6 @@ const initialState = {
         isRecipeDeleteSuccess: false
     }
 };
-
 const store = createStore(combineReducers, initialState, applyMiddleware(thunk));
 
 export default store;

@@ -54,7 +54,6 @@ class EditRecipeFormComponent extends Component {
         };
         this.props.requestUpdateRecipesApi(dataObj);
         this.props.openEditRecipe();
-        
     };
     render() {
         return (

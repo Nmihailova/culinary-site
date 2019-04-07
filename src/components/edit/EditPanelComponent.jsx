@@ -7,7 +7,7 @@ import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import { openAddRecipe, openEditRecipe, requestDeleteRecipeApi } from '../../js/actions';
+import { openAddRecipe, openEditRecipe, requestDeleteRecipeApi, setCurRecipeObj } from '../../js/actions';
 
 import './edit.scss';
 
@@ -22,13 +22,15 @@ const mapDispatchToProps = dispatch => {
     return {
         openAddRecipe: () => dispatch(openAddRecipe()),
         openEditRecipe: () => dispatch(openEditRecipe()),
-        requestDeleteRecipeApi: id => dispatch(requestDeleteRecipeApi(id))
+        requestDeleteRecipeApi: id => dispatch(requestDeleteRecipeApi(id)),
+        setCurRecipeObj: data=> dispatch(setCurRecipeObj(data))
     }
 };
 
 class EditPanelComponent extends Component {
     deleteRecipe = () => {
         this.props.requestDeleteRecipeApi(this.props.currentRecipeObj._id);
+        this.props.setCurRecipeObj({});
     }
     render() {
         return (

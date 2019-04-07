@@ -39,6 +39,8 @@ export const requestAddRecipeApi = data => {
       axios.post(`${HOST}/add-new-recipe`, data)
         .then(res => {
           dispatch(requestGetRecipesApi());
+          dispatch(setCurRecipeObj(res.data));
+          document.location.href = `/show-recipe/${res.data._id}`;
           dispatch({
             type: 'ADD_RECIPE_SUCCESS',
             payload: res.data

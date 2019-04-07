@@ -10,23 +10,19 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        requestGetRecipesApi: () => dispatch(requestGetRecipesApi()),
         setCurRecipeObj: data=> dispatch(setCurRecipeObj(data))
     }
 };
 
-class GetCurrentRecipeComponent extends Component {
-    componentDidUpdate() {
-        let currRecipe = this.props.recipeList.filter(recipe => {
-            return recipe._id === this.props.currentId;
+const GetCurrentRecipeComponent = ({ recipeList, setCurRecipeObj, currentId}) => {
+        if(recipeList.length > 0 && typeof recipeList !== 'string') {
+            let currRecipe = recipeList.filter(recipe => {
+            return recipe._id === currentId;
         });
-        this.props.setCurRecipeObj(currRecipe[0]);
-    }
-
-    render() {
+        setCurRecipeObj(currRecipe[0]);
+        }
         
        return null; 
-    }
 };
 
 const GetCurrentRecipe = connect(mapStateToProps, mapDispatchToProps)(GetCurrentRecipeComponent);

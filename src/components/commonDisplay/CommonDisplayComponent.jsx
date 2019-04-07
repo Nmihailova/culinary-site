@@ -14,18 +14,20 @@ const mapStateToProps = state => {
         isAddRecipeOpen: state.addReducer.isAddRecipeOpen,
         isRecipeChoosen: state.chooseReducer.isRecipeChoosen,
         isEditRecipeOpen: state.editReducer.isEditRecipeOpen,
-        recipeList: state.getReducer.recipeList
+        recipeList: state.getReducer.recipeList,
+        currentRecipeObj: state.chooseReducer.currentRecipeObj
     }
 };
 
-const CommonDisplayComponent = ({ isAddRecipeOpen, isRecipeChoosen, isEditRecipeOpen, recipeList }) => {
+const CommonDisplayComponent = ({ isAddRecipeOpen, isRecipeChoosen, isEditRecipeOpen, recipeList, currentRecipeObj }) => {
     return (
         <section className="common-display">
             <Switch>
                 <Route exact path="/" component={CommonText} />
-                {typeof recipeList !== 'string' && <Route exact path="/show-recipe/:recipeId" component={ShowRecipe} />}
-                <Route exact path="/add-recipe" component={AddRecipeFormComponent} />
-                <Route exact path="/edit-recipe" component={EditRecipeForm} />
+                {typeof recipeList !== 'string' && 
+                    <Route path="/show-recipe/:recipeId" component={ShowRecipe} />}
+                <Route path="/add-recipe" component={AddRecipeFormComponent} />
+                <Route path="/edit-recipe" component={EditRecipeForm} />
             </Switch>
         </section>
     )

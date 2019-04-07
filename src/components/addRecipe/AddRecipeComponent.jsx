@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { requestAddRecipeApi, openAddRecipe } from '../../js/actions';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import './add.scss';
 
 const mapStateToProps = state => {
     return {
-        currentRecipeObj: state.chooseReducer.currentRecipeObj
+        currentRecipeObj: state.chooseReducer.currentRecipeObj,
+        isRecipedAdded: state.addReducer.isRecipedAdded
     }
 };
 
@@ -42,8 +43,8 @@ class AddRecipeFormComponent extends Component {
             text: this.state.newRecipeText
         };
         this.props.requestAddRecipeApi(dataObj);
-
         this.props.openAddRecipe();
+
     };
     render() {
         return (
@@ -58,8 +59,9 @@ class AddRecipeFormComponent extends Component {
                     <textarea name="text" cols="40" rows="10" value={this.state.newRecipeText} className="add-recipe__text" onChange={this.enterText}/>
                 </label>
                 <div className="add-recipe__buttons">
-                    <Link className="link" to={`/show-recipe/${this.props.currentRecipeObj._id}`}><Button variant="contained" disabled={this.state.newRecipeText.length === 0 || this.state.newRecipeTitle.length === 0 ? true : false} className="add-recipe__buttons__add-btn" onClick={this.addRecipe}>Добавить рецепт</Button></Link>
-                    <Link className="link" to={`/show-recipe/${this.props.currentRecipeObj._id}`}><Button variant="contained" className="add-recipe__buttons__cancel-btn" onClick={this.props.openAddRecipe}>Отмена</Button></Link>
+                    <Button variant="contained" disabled={this.state.newRecipeText.length === 0 || this.state.newRecipeTitle.length === 0 ? true : false} className="add-recipe__buttons__add-btn" onClick={this.addRecipe}>Добавить рецепт</Button>
+                    <Link className="link" to={Object.keys(this.props.currentRecipeObj).length !== 0 ? `/show-recipe/${this.props.currentRecipeObj._id}`: '/'}>
+                    <Button variant="contained" className="add-recipe__buttons__cancel-btn" onClick={this.props.openAddRecipe}>Отмена</Button></Link>
                 </div>
             </div>
         )

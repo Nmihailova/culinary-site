@@ -12,6 +12,7 @@ function addReducer (state = initialState, action) {
             return { ...state, isRecipedAdded: false };
 
         case 'OPEN_ADD_RECIPE':
+            console.log(!state.isAddRecipeOpen);
             return { ...state, isAddRecipeOpen: !state.isAddRecipeOpen};
     
         default:

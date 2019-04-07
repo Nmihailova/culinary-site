@@ -33,7 +33,7 @@ class RecipeListComponent extends Component {
         let recipeList;
         if(this.props.recipeList.length > 0 && typeof this.props.recipeList !== 'string') {
             recipeList = this.props.recipeList.map((recipe) => {
-                return <Link class="link" key={recipe._id} to={`/show-recipe/${recipe._id}`}>
+                return <Link  class="link" key={recipe._id} to={`/show-recipe/${recipe._id}`}>
                     <li className={this.props.currentRecipeObj._id === recipe._id ? "recipes__list__item active" : "recipes__list__item"} 
                          id={recipe._id} 
                         onClick={this.chooseRecipe}>
