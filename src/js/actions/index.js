@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const HOST = "http://localhost:3001";
+const HOST = "https://culinary-site.herokuapp.com/";
 
 export const openAddRecipe = () => {
   return {
@@ -15,14 +15,14 @@ export const openEditRecipe = () => {
 };
 
 export const setCurRecipeObj = (data) => {
-  return  {
+  return {
     type: 'SET_CURRENT_RECIPE_OBJECT',
     data
   }
 };
 
 export const showRecipe = () => {
-  return  {
+  return {
     type: 'SHOW_RECIPE'
   }
 };
@@ -30,97 +30,97 @@ export const showRecipe = () => {
 //api middlewares
 
 export const requestAddRecipeApi = data => {
-    return dispatch => {
-      dispatch({
-        type: 'ADD_RECIPE_REQUEST',
-        payload: data
-      })
-  
-      axios.post(`${HOST}/add-new-recipe`, data)
-        .then(res => {
-          dispatch(requestGetRecipesApi());
-          document.location.href = `/show-recipe/${res.data._id}`;
-          
-          dispatch({
-            type: 'ADD_RECIPE_SUCCESS',
-            payload: res.data
-          })
-        })
-        .catch(err => {
-          dispatch({
-            type: 'ADD_RECIPE_FAIL',
-            payload: err
-          })
-        })
-    }
-  };
-  
-  export const requestGetRecipesApi = () => {
-    return dispatch => {
-      dispatch({
-        type: 'GET_RECIPE_LIST_REQUEST'
-      })
-  
-      axios.get(`${HOST}/get-recipes`)
-        .then(res => {
-          dispatch({
-            type: 'GET_RECIPE_LIST_SUCCESS',
-            payload: res.data
-          })
-        })
-        .catch(err => {
-          dispatch({
-            type: 'GET_RECIPE_LIST_FAIL',
-            payload: err
-          })
-        })
-    }
-  };
+  return dispatch => {
+    dispatch({
+      type: 'ADD_RECIPE_REQUEST',
+      payload: data
+    })
 
-  export const requestUpdateRecipesApi = data => {
-    return dispatch => {
-      dispatch({
-        type: 'UPDATE_RECIPE_REQUEST',
-        payload: data
-      })
-  
-      axios.put(`${HOST}/update-recipe`, data)
-        .then(res => {
-          dispatch(requestGetRecipesApi());
-          dispatch({
-            type: 'UPDATE_RECIPE_SUCCESS',
-            payload: res.data
-          })
-        })
-        .catch(err => {
-          dispatch({
-            type: 'UPDATE_RECIPE_FAIL',
-            payload: err
-          })
-        })
-    }
-  };
+    axios.post(`${HOST}/add-new-recipe`, data)
+      .then(res => {
+        dispatch(requestGetRecipesApi());
+        document.location.href = `/show-recipe/${res.data._id}`;
 
-  export const requestDeleteRecipeApi = id => {
-    return dispatch => {
-      dispatch({
-        type: 'DELETE_RECIPE_REQUEST',
-        payload: id
+        dispatch({
+          type: 'ADD_RECIPE_SUCCESS',
+          payload: res.data
+        })
       })
-  
-      axios.delete(`${HOST}/delete-recipes/${id}`)
-        .then(res => {
-          dispatch(requestGetRecipesApi());
-          dispatch({
-            type: 'DELETE_RECIPE_SUCCESS',
-            payload: res.data
-          })
+      .catch(err => {
+        dispatch({
+          type: 'ADD_RECIPE_FAIL',
+          payload: err
         })
-        .catch(err => {
-          dispatch({
-            type: 'DELETE_RECIPE_FAIL',
-            payload: err
-          })
+      })
+  }
+};
+
+export const requestGetRecipesApi = () => {
+  return dispatch => {
+    dispatch({
+      type: 'GET_RECIPE_LIST_REQUEST'
+    })
+
+    axios.get(`${HOST}/get-recipes`)
+      .then(res => {
+        dispatch({
+          type: 'GET_RECIPE_LIST_SUCCESS',
+          payload: res.data
         })
-    }
-  };
+      })
+      .catch(err => {
+        dispatch({
+          type: 'GET_RECIPE_LIST_FAIL',
+          payload: err
+        })
+      })
+  }
+};
+
+export const requestUpdateRecipesApi = data => {
+  return dispatch => {
+    dispatch({
+      type: 'UPDATE_RECIPE_REQUEST',
+      payload: data
+    })
+
+    axios.put(`${HOST}/update-recipe`, data)
+      .then(res => {
+        dispatch(requestGetRecipesApi());
+        dispatch({
+          type: 'UPDATE_RECIPE_SUCCESS',
+          payload: res.data
+        })
+      })
+      .catch(err => {
+        dispatch({
+          type: 'UPDATE_RECIPE_FAIL',
+          payload: err
+        })
+      })
+  }
+};
+
+export const requestDeleteRecipeApi = id => {
+  return dispatch => {
+    dispatch({
+      type: 'DELETE_RECIPE_REQUEST',
+      payload: id
+    })
+
+    axios.delete(`${HOST}/delete-recipes/${id}`)
+      .then(res => {
+        dispatch(requestGetRecipesApi());
+        dispatch({
+          type: 'DELETE_RECIPE_SUCCESS',
+          payload: res.data
+        })
+      })
+      .catch(err => {
+        dispatch({
+          type: 'DELETE_RECIPE_FAIL',
+          payload: err
+        })
+      })
+  }
+};
