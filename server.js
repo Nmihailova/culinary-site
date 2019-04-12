@@ -25,7 +25,7 @@ app.get(/\/[^get-]/, function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-mongoose.connect("mongodb://localhost:27017/recipedb", { useNewUrlParser: true },
+mongoose.connect(process.env.MLAB_URI, { useNewUrlParser: true },
   function (err) {
     if (err) return console.log("my error: " + err);
 
@@ -52,7 +52,7 @@ app.post('/add-new-recipe', jsonParser, function (req, res) {
     title: dataObj.title,
     text: dataObj.text
   }).then(newRecipe => {
-      res.send(newRecipe);
+    res.send(newRecipe);
   }).catch(err => {
     console.log(err, "recipe not created");
     res.send(err);
@@ -63,7 +63,7 @@ app.get('/get-recipes', (req, res) => {
   Recipe.find({}, (err, recipes) => {
     if (err) return console.log(err);
 
-    res.send(recipes); 
+    res.send(recipes);
   });
 });
 
@@ -72,8 +72,8 @@ app.put('/update-recipe', jsonParser, (req, res) => {
   cutPotentialDangerousChars(dataObj);
 
   let id = dataObj.id;
-  Recipe.findOneAndUpdate({_id: id}, {title: dataObj.title, text: dataObj.text}, {new: true}, function(err, recipe) {
-    if(err) return console.log(err);
+  Recipe.findOneAndUpdate({ _id: id }, { title: dataObj.title, text: dataObj.text }, { new: true }, function (err, recipe) {
+    if (err) return console.log(err);
 
     res.send(recipe);
   })
