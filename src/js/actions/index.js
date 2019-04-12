@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const HOST = "https://culinary-site.herokuapp.com/";
+const HOST = "https://culinary-site.herokuapp.com";
 
 export const openAddRecipe = () => {
   return {
