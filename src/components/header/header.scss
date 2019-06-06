@@ -1,0 +1,12 @@
+.header{
+  &__text {
+    text-decoration: none;
+  }
+
+  &__text:hover {
+    color: black;
+  }
+  &__text:visited {
+    color: black;
+  }
+}

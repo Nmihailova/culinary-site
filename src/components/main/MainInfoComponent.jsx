@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { requestGetRecipesApi } from '../../js/actions';
+import { getRecipe } from '../../js/actions';
 
 import { SideBar } from './sidebar/SideBarComponent';
 import CommonDisplay from './commonDisplay/CommonDisplayComponent';
@@ -8,23 +8,23 @@ import CommonDisplay from './commonDisplay/CommonDisplayComponent';
 import './main.scss';
 
 const mapDispatchToProps = dispatch => {
-    return {
-        requestGetRecipesApi: () => dispatch(requestGetRecipesApi()),
-    }
-  };
+  return {
+    getRecipe: () => dispatch(getRecipe()),
+  }
+};
 
 class MainInfoComponent extends Component {
-    componentWillMount() {
-        this.props.requestGetRecipesApi()
-      }
-    render() {
-        return (
-            <main className="main-info">
-                <SideBar />
-                <CommonDisplay />
-            </main>
-        )
-    }
+  componentWillMount () {
+    this.props.getRecipe()
+  }
+  render () {
+    return (
+      <main className="main-info">
+        <SideBar />
+        <CommonDisplay />
+      </main>
+    )
+  }
 };
 
 const MainInfo = connect(null, mapDispatchToProps)(MainInfoComponent);
